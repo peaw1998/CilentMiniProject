@@ -9,13 +9,14 @@ app.use(bodyParser.json());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
+app.use(require("./course"));
+app.use(require("./student"));
 
 app.get("/generatetoken", (req, res) => {
-  res.send(token.createToken("test123"));
+  res.send(token.createToken("testtest"));
 });
 
-app.get("/test2", token.setID, (req, res) => {
-  console.log(req.tokenID);
+app.get("/test2", token.checkStudent, (req, res) => {
   res.send("ok");
 });
 

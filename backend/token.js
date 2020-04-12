@@ -2,9 +2,17 @@ const jwt = require("jwt-simple");
 
 //middleware check token
 const tokenFunc = {
-  createToken: (data) => {
+  createTokenTeacher: (data) => {
     const payload = {
       id: data,
+      role: "teacher",
+    };
+    return jwt.encode(payload, "SECRET");
+  },
+  createTokenStudent: (data) => {
+    const payload = {
+      id: data,
+      role: "student",
     };
     return jwt.encode(payload, "SECRET");
   },
@@ -13,7 +21,7 @@ const tokenFunc = {
     if (req.headers.authorization) {
       if (req.headers.authorization.startsWith("Bearer ")) {
         let token = req.headers.authorization.split(" ")[1];
-        return jwt.decode(token, "SECRET").id;
+        return jwt.decode(token, "SECRET");
       }
     }
   },
@@ -21,7 +29,7 @@ const tokenFunc = {
   setID: (req, res, next) => {
     let tokenID = null;
     try {
-      tokenID = tokenFunc.getToken(req);
+      tokenID = tokenFunc.getToken(req).id;
     } catch (error) {}
 
     if (!tokenID) {
@@ -29,6 +37,19 @@ const tokenFunc = {
       return;
     }
     req.tokenID = tokenID;
+    next();
+  },
+
+  checkStudent: (req, res, next) => {
+    let tokenStudent = null;
+    try {
+      tokenStudent = tokenFunc.getToken(req).role;
+      console.log(tokenStudent);
+    } catch (error) {}
+    if (tokenStudent !== "student") {
+      res.sendStatus(401);
+      return;
+    }
     next();
   },
 };
