@@ -28,9 +28,13 @@ router.get(
     const course = await axios.get(
       "https://mini-project-f433b.firebaseio.com/courses.json"
     );
-    courseByStudent = convertObjectToArray(course.data).filter(
-      (course) => course && course.studentId == req.tokenID
-    );
+    courseByStudent = convertObjectToArray(course.data).filter((course) => {
+      if (course && course.studentId === req.tokenID) {
+        return true;
+      } else {
+        return false;
+      }
+    });
     res.send(courseByStudent);
   }
 );

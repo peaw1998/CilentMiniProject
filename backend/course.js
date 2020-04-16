@@ -6,6 +6,7 @@ const convertObjectToArray = require("./convertObjectToArray");
 const { check, validationResult } = require("express-validator");
 let axios = require("axios");
 let token = require("./token");
+let validator = require("./validator");
 
 router
   .route("/course")
@@ -22,13 +23,7 @@ router
       check("description").not().isEmpty(),
       check("price").not().isEmpty(),
     ],
-    (req, res, next) => {
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-      }
-      next();
-    },
+    validator,
     token.setID,
     token.checkStudent,
     async (req, res) => {
