@@ -14,12 +14,13 @@ app.use(require("./student"));
 app.use(require("./teacher"));
 app.use(require("./admin"));
 app.use(require("./offer"));
+let { checkStudent } = require("./middleware");
 
 app.get("/generatetoken", (req, res) => {
   res.send(token.createToken("testtest"));
 });
 
-app.get("/test2", token.checkStudent, (req, res) => {
+app.get("/test2", checkStudent, (req, res) => {
   res.send("ok");
 });
 

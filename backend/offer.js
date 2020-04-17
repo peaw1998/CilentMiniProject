@@ -7,12 +7,13 @@ const { check, validationResult } = require("express-validator");
 let axios = require("axios");
 let token = require("./token");
 let validator = require("./validator");
+let { setID, checkTeacher } = require("./middleware");
 
 router
   .route("/offer")
   .post(
-    token.setID,
-    token.checkTeacher,
+    setID,
+    checkTeacher,
     [check("courseId").not().isEmpty()],
     validator,
     async (req, res) => {

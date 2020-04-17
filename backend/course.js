@@ -6,6 +6,7 @@ const convertObjectToArray = require("./convertObjectToArray");
 const { check, validationResult } = require("express-validator");
 let axios = require("axios");
 let token = require("./token");
+let { setID, checkStudent } = require("./middleware");
 let validator = require("./validator");
 
 router
@@ -24,8 +25,8 @@ router
       check("price").not().isEmpty(),
     ],
     validator,
-    token.setID,
-    token.checkStudent,
+    setID,
+    checkStudent,
     async (req, res) => {
       const response = await axios.post(
         "https://mini-project-f433b.firebaseio.com/courses.json",
