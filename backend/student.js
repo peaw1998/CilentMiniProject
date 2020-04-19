@@ -34,5 +34,15 @@ router.get("/student/course", setID, checkStudent, async (req, res) => {
   });
   res.send(courseByStudent);
 });
+router.post("/student/register", async (req, res) => {
+  let response = await axios.post(
+    "https://mini-project-f433b.firebaseio.com/students.json",
+    req.body
+  );
+  if (response.data) {
+    res.send(token.createTokenStudent(response.data.name));
+  }
+  return res.sendStatus(400);
+});
 
 module.exports = router;
