@@ -14,7 +14,6 @@
   align-items: center;
   /* justify-content: center; */
   width: 100%;
-
 }
 .status_box {
   display: flex;
@@ -37,37 +36,39 @@
 
   flex-direction: row;
   justify-content: space-around;
-
 }
 
-
-.bg{
+.bg {
   background-image: url(./images/bg2.jpg);
   height: 100%;
- 
 }
-.bg2{
+.bg2 {
   background-image: url(./images/bg2.jpg);
   /* height: 100%; */
- 
 }
 
-@import url('https://fonts.googleapis.com/css?family=Kanit&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
+@import url("https://fonts.googleapis.com/css?family=Kanit&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Josefin+Sans");
 
-.font{
-  font-family: 'Kanit';
+.font {
+  font-family: "Kanit";
   color: #ffffff;
 }
 
-.font2{
-  font-family: 'Kanit';
+.font2 {
+  font-family: "Kanit";
   color: #000;
 }
 
-.dis{
+.dis {
   margin-top: 5;
   margin-bottom: 5;
 }
-
-
+.login {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  width: 100%;
+}

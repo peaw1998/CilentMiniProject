@@ -61,7 +61,6 @@ const StudentHome = (props) => {
             สถานะ
           </Button>
         </div>
-        <LoginButton />
       </div>
     </>
   );
