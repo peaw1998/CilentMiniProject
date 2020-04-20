@@ -15,7 +15,7 @@ const Login = (props) => {
             <Form style={{ width: "60%" }}>
               <Form.Row>
                 <Form.Group as={Col} controlId="validationCustom01">
-                  <Form.Label className="font2">E-mail</Form.Label>
+                  <Form.Label className="font">E-mail</Form.Label>
                   <Col>
                     <Form.Control
                       placeholder="E-mail"
@@ -28,7 +28,7 @@ const Login = (props) => {
               </Form.Row>
               <Form.Row>
                 <Form.Group as={Col} controlId="validationCustom01">
-                  <Form.Label className="font2">Password</Form.Label>
+                  <Form.Label className="font">Password</Form.Label>
                   <Col>
                     <Form.Control
                       placeholder="Password"
@@ -42,7 +42,11 @@ const Login = (props) => {
               </Form.Row>
             </Form>
 
-            <Button variant="success" style={{ marginBottom: 10 }}>
+            <Button
+              variant="success"
+              className="font"
+              style={{ marginBottom: 10 }}
+            >
               Login
             </Button>
             <text className="font" style={{ marginBottom: 10 }}>

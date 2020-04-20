@@ -1,10 +1,12 @@
 const auth = (
   state = {
-    login: true,
+    login: !!localStorage.getItem("token"),
   },
   action
 ) => {
   switch (action.type) {
+    case "LOGIN_SUCCESS":
+      return { login: true };
     default:
       return state;
   }
