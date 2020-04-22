@@ -9,30 +9,36 @@ const AddCourse = (props) => {
   const [name, setName] = useState("");
   const [detail, setDetail] = useState("");
   const [price, setPrice] = useState("");
-  const id = props.student.id;
 
   const Post = async () => {
-    const res = await axios.post("http://localhost:5000/course", {
-      studentId: id,
-      name: name,
-      description: detail,
-      price: price,
-    });
+    const res = await axios.post(
+      "http://localhost:5000/course",
+      {
+        name: name,
+        description: detail,
+        price: price,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
     props.history.push("/");
   };
 
   return (
     <>
-      <div className="bg center_page">
+      <div className="bg center ">
         <h1 className="font2">เพิ่มคอร์สเรียนของฉัน</h1>
-
         <Form style={{ width: "40%" }}>
           <Form.Row>
             <Form.Group as={Col} controlId="validationCustom01">
               <Form.Label className="font2">ชื่อวิชา</Form.Label>
               <Col>
                 <Form.Control
-                  placeholder="วิชาที่อยากเรียน"
+                  placeholder="วิชาที่อยากเรียน เช่น เปียโน คณิตศาสตร์(ม.2) ภาษาไทย(Onet) เป็นต้น "
                   className="font"
                   style={{ marginTop: 5, marginBottom: 5 }}
                   onChange={(e) => setName(e.target.value)}
@@ -45,9 +51,10 @@ const AddCourse = (props) => {
               <Form.Label className="font2">รายละเอียดวิชา</Form.Label>
               <Col>
                 <Form.Control
-                  placeholder="รายละเอียด"
+                  placeholder="รายละเอียดต่าง ๆ เช่น พื้นฐานก่อนหน้า วัตถุประสงค์ในการเรียน อายุผู้เรียน เวลาที่ต้องการเรียน(กำหนดเป็นวันและเวลา/อาทิตย์) เป็นต้น"
                   className="font"
-                  style={{ marginTop: 5, marginBottom: 5 }}
+                  as="textarea"
+                  rows="8"
                   onChange={(e) => setDetail(e.target.value)}
                 />
               </Col>
@@ -58,7 +65,7 @@ const AddCourse = (props) => {
               <Form.Label className="font2">ราคา</Form.Label>
               <Col>
                 <Form.Control
-                  placeholder="ราคา"
+                  placeholder="ราคา กำหนดเป็นช่วง เช่น 300-500/ชั่วโมง"
                   className="font"
                   style={{ marginTop: 5, marginBottom: 5 }}
                   onChange={(e) => setPrice(e.target.value)}

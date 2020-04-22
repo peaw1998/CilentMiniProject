@@ -8,6 +8,7 @@ const MyNav = (props) => {
       <Navbar.Brand
         onClick={(event) => {
           event.preventDefault();
+          props.history.push("/");
           console.log(props);
         }}
       >

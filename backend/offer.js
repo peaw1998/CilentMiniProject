@@ -33,6 +33,9 @@ router
             {
               teacherId: req.tokenID,
               courseId: req.body.courseId,
+              name: response.data.name,
+              description: response.data.description,
+              price: response.data.price,
             }
           );
 

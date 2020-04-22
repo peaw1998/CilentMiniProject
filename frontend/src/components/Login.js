@@ -2,6 +2,7 @@ import React from "react";
 import "../App.css";
 import { Button, Card, Form, Col } from "react-bootstrap";
 import LoginButton from "./LoginFacebookButton";
+import LoginButtonTeacher from "./LoginFacebookButtonTeacher";
 
 const Login = (props) => {
   return (
@@ -53,6 +54,7 @@ const Login = (props) => {
               สมัครสมาชิกใหม่
             </text>
             <LoginButton />
+            <LoginButtonTeacher />
           </Card.Body>
         </Card>
       </div>

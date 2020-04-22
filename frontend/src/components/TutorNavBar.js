@@ -26,8 +26,8 @@ const MyNav = (props) => {
             {" "}
             Home
           </Nav.Link>
-          <Nav.Link href="/tutor/course">All Course</Nav.Link>
-          {/* <Nav.Link href="/status">Status</Nav.Link> */}
+          <Nav.Link href="/tutor/home">All Course</Nav.Link>
+          <Nav.Link href="/tutor/course">My Course</Nav.Link>
         </Nav>
         <Form inline>
           <FormControl type="text" placeholder="Search" className="mr-sm-2" />

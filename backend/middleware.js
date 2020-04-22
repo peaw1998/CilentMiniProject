@@ -8,7 +8,7 @@ const Func = {
     } catch (error) {}
 
     if (!tokenID) {
-      res.sendStatus(401);
+      res.status(401).send("not found ID");
       return;
     }
     req.tokenID = tokenID;
@@ -31,11 +31,11 @@ const Func = {
   checkTeacher: (req, res, next) => {
     let tokenTeacher = null;
     try {
-      tokenTeacher = tokenFunc.getToken(req).role;
+      tokenTeacher = token.getToken(req).role;
       console.log(tokenTeacher);
     } catch (error) {}
     if (tokenTeacher !== "teacher") {
-      res.sendStatus(401);
+      res.status(401).send(token.getToken(req));
       return;
     }
     next();
@@ -44,7 +44,7 @@ const Func = {
   checkAdmin: (req, res, next) => {
     let tokenAdmin = null;
     try {
-      tokenAdmin = tokenFunc.getToken(req).role;
+      tokenAdmin = token.getToken(req).role;
       console.log(tokenAdmin);
     } catch (error) {}
     if (tokenAdmin !== "admin") {

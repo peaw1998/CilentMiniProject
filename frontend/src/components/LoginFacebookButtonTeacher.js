@@ -28,17 +28,17 @@ const LoginFacebookButton = (props) => {
               //register
               const res = await axios.post("http://localhost:5000/user", {
                 email: user.email,
-                role: "student",
+                role: "teacher",
               });
               //ระบบ login อื่น นอกจาก facebook
               if (res.data) {
                 localStorage.setItem("token", res.data);
                 dispatch({ type: "LOGIN_SUCCESS" });
-                props.history.push("/");
+                props.history.push("/tutor/home");
               }
             } else {
               const res2 = await axios.post(
-                "http://localhost:5000/student/login",
+                "http://localhost:5000/teacher/login",
                 {
                   email: user.email,
                 }
@@ -47,7 +47,7 @@ const LoginFacebookButton = (props) => {
               if (res2.data) {
                 localStorage.setItem("token", res2.data);
                 dispatch({ type: "LOGIN_SUCCESS" });
-                props.history.push("/");
+                props.history.push("/tutor/home");
               }
             }
 
