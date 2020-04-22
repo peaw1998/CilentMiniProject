@@ -34,25 +34,25 @@ router.get("/student/course", setID, checkStudent, async (req, res) => {
   });
   res.send(courseByStudent);
 });
-router.post("/student/register", async (req, res) => {
-  let response = await axios.post(
-    "https://mini-project-f433b.firebaseio.com/students.json",
-    req.body
-  );
-  if (response.data) {
-    return res.send(token.createTokenStudent(response.data.name));
-  }
-  return res.sendStatus(400);
-});
 
 router.post("/student/login", async (req, res) => {
-  const res1 = await axios.get(
-    `https://mini-project-f433b.firebaseio.com/students.json?orderBy="email"&equalTo="${req.body.email}"`
-  );
-  if (convertObjectToArray(res1.data).length === 0) {
-    res.status(401).send("not found");
-  } else {
-    res.send(token.createTokenStudent(convertObjectToArray(res1.data)[0].id));
+  try {
+    const response = await axios.get(
+      `https://mini-project-f433b.firebaseio.com/users.json?orderBy="email"&equalTo="${req.body.email}"`
+    );
+
+    console.log(convertObjectToArray(response.data));
+    const res1 = await axios.get(
+      `https://mini-project-f433b.firebaseio.com/students.json?orderBy="userId"&equalTo="${
+        convertObjectToArray(response.data)[0].id
+      }"`
+    );
+    console.log(convertObjectToArray(res1.data));
+    return res.send(
+      token.createTokenStudent(convertObjectToArray(res1.data)[0].id)
+    );
+  } catch (err) {
+    return res.sendStatus(401);
   }
 });
 

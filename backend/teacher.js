@@ -39,4 +39,26 @@ router.get("/teacher/offer", setID, checkTeacher, async (req, res) => {
   }
   return res.sendStatus(400);
 });
+
+router.post("/teacher/login", async (req, res) => {
+  try {
+    const response = await axios.get(
+      `https://mini-project-f433b.firebaseio.com/users.json?orderBy="email"&equalTo="${req.body.email}"`
+    );
+
+    console.log(convertObjectToArray(response.data));
+    const res1 = await axios.get(
+      `https://mini-project-f433b.firebaseio.com/teachers.json?orderBy="userId"&equalTo="${
+        convertObjectToArray(response.data)[0].id
+      }"`
+    );
+    console.log(convertObjectToArray(res1.data));
+    return res.send(
+      token.createTokenTeacher(convertObjectToArray(res1.data)[0].id)
+    );
+  } catch (err) {
+    return res.sendStatus(401);
+  }
+});
+
 module.exports = router;
