@@ -40,6 +40,17 @@ router.get("/teacher/offer", setID, checkTeacher, async (req, res) => {
   return res.sendStatus(400);
 });
 
+router.get("/teacher/profile", setID, async (req, res) => {
+  const response = await axios.get(
+    `https://mini-project-f433b.firebaseio.com/teachers/${req.tokenID}.json`
+  );
+
+  const res1 = await axios.get(
+    `https://mini-project-f433b.firebaseio.com/users/${response.data.userId}.json`
+  );
+  return res.send(res1.data);
+});
+
 router.post("/teacher/login", async (req, res) => {
   try {
     const response = await axios.get(

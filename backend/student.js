@@ -35,6 +35,17 @@ router.get("/student/course", setID, checkStudent, async (req, res) => {
   res.send(courseByStudent);
 });
 
+router.get("/student/profile", setID, async (req, res) => {
+  const response = await axios.get(
+    `https://mini-project-f433b.firebaseio.com/students/${req.tokenID}.json`
+  );
+
+  const res1 = await axios.get(
+    `https://mini-project-f433b.firebaseio.com/users/${response.data.userId}.json`
+  );
+  return res.send(res1.data);
+});
+
 router.post("/student/login", async (req, res) => {
   try {
     const response = await axios.get(
