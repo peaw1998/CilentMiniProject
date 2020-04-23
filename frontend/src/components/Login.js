@@ -1,63 +1,144 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../App.css";
-import { Button, Card, Form, Col } from "react-bootstrap";
+import {
+  Button,
+  Card,
+  Form,
+  Col,
+  Navbar,
+  Nav,
+  FormControl,
+  Carousel,
+} from "react-bootstrap";
 import LoginButton from "./LoginFacebookButton";
 import LoginButtonTeacher from "./LoginFacebookButtonTeacher";
+import Footer from "./Footer";
 
 const Login = (props) => {
+  const [type, setType] = useState("initial");
+
+  let nav = () => {
+    if (type === "initial") {
+      return (
+        <>
+          <Button
+            variant="outline-danger"
+            className="font"
+            style={{ margin: 10 }}
+            onClick={() => {
+              setType("student");
+            }}
+          >
+            Student
+          </Button>
+          <Button
+            variant="outline-danger"
+            className="font"
+            onClick={() => {
+              setType("teacher");
+            }}
+          >
+            Tutor
+          </Button>
+        </>
+      );
+    } else if (type === "student") {
+      return (
+        <>
+          <Button
+            variant="outline-warning"
+            className="font"
+            style={{ marginRight: 10 }}
+            onClick={() => {
+              setType("initial");
+            }}
+          >
+            Back
+          </Button>
+          <LoginButton />
+        </>
+      );
+    } else if (type === "teacher") {
+      return (
+        <>
+          <Button
+            variant="outline-warning"
+            className="font"
+            style={{ marginRight: 10 }}
+            onClick={() => {
+              setType("initial");
+            }}
+          >
+            Back
+          </Button>
+          <LoginButtonTeacher />
+        </>
+      );
+    }
+  };
+
+  useEffect(() => {
+    nav();
+  }, [type]);
+
   return (
     <>
-      <div className="bg center_page">
-        <Card bg="dark" style={{ width: "30rem", height: "30rem" }}>
-          <Card.Header className="font" style={{ fontSize: 25 }}>
-            Login
-          </Card.Header>
-          <Card.Body className="login">
-            <Form style={{ width: "60%" }}>
-              <Form.Row>
-                <Form.Group as={Col} controlId="validationCustom01">
-                  <Form.Label className="font">E-mail</Form.Label>
-                  <Col>
-                    <Form.Control
-                      placeholder="E-mail"
-                      className="font"
-                      style={{ marginTop: 5, marginBottom: 5 }}
-                      // onChange={(e) => setName(e.target.value)}
-                    />
-                  </Col>
-                </Form.Group>
-              </Form.Row>
-              <Form.Row>
-                <Form.Group as={Col} controlId="validationCustom01">
-                  <Form.Label className="font">Password</Form.Label>
-                  <Col>
-                    <Form.Control
-                      placeholder="Password"
-                      type="password"
-                      className="font"
-                      style={{ marginTop: 5, marginBottom: 5 }}
-                      // onChange={(e) => setName(e.target.value)}
-                    />
-                  </Col>
-                </Form.Group>
-              </Form.Row>
-            </Form>
+      <Navbar bg="light" expand="lg">
+        <Navbar.Brand className="font" href="/">
+          Qpid Course
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mr-auto" />
+          {nav()}
+        </Navbar.Collapse>
+      </Navbar>
 
+      <Carousel>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src="https://picsum.photos/800/400"
+            alt="First slide"
+          />
+          <Carousel.Caption>
+            <h3>First slide label</h3>
+            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src="https://picsum.photos/800/400"
+            alt="Third slide"
+          />
+
+          <Carousel.Caption>
+            <h3>Second slide label</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src="https://picsum.photos/800/400"
+            alt="Third slide"
+          />
+
+          <Carousel.Caption>
+            <h3>Third slide label</h3>
             <Button
-              variant="success"
+              variant="warning"
               className="font"
-              style={{ marginBottom: 10 }}
+              style={{ marginTop: 5, marginBottom: 5 }}
             >
-              Login
+              เพิ่มคอร์ส
             </Button>
-            <text className="font" style={{ marginBottom: 10 }}>
-              สมัครสมาชิกใหม่
-            </text>
-            <LoginButton />
-            <LoginButtonTeacher />
-          </Card.Body>
-        </Card>
-      </div>
+          </Carousel.Caption>
+        </Carousel.Item>
+      </Carousel>
+
+      <Footer />
     </>
   );
 };

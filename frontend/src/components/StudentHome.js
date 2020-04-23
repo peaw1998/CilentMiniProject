@@ -2,6 +2,7 @@ import React from "react";
 import "../App.css";
 import { Button, Card, Carousel } from "react-bootstrap";
 import LoginButton from "./LoginFacebookButton";
+import Footer from "./Footer";
 
 const StudentHome = (props) => {
   return (
@@ -50,6 +51,8 @@ const StudentHome = (props) => {
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
+
+      <Footer />
       {/* <div>
           <Card bg="dark" style={{ width: "50rem", height: "20rem" }}>
             <Card.Header className="font">วิธีการเพิ่มคอร์สเรียน</Card.Header>
