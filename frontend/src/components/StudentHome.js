@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../App.css";
 import { Button, Card, Carousel } from "react-bootstrap";
 import LoginButton from "./LoginFacebookButton";
 import Footer from "./Footer";
+import axios from "../../../backend/node_modules/axios";
 
 const StudentHome = (props) => {
   return (

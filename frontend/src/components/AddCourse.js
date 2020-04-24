@@ -4,6 +4,8 @@ import { Button, Card, Form, Col } from "react-bootstrap";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import axios from "axios";
+import Footer from "./Footer";
+import Alert from "sweetalert2";
 
 const AddCourse = (props) => {
   const [name, setName] = useState("");
@@ -11,26 +13,43 @@ const AddCourse = (props) => {
   const [price, setPrice] = useState("");
 
   const Post = async () => {
-    const res = await axios.post(
-      "http://localhost:5000/course",
-      {
-        name: name,
-        description: detail,
-        price: price,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+    const res1 = await axios
+      .post(
+        "http://localhost:5000/course",
+        {
+          name: name,
+          description: detail,
+          price: price,
         },
-      }
-    );
-    props.history.push("/");
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
+      .then(() => {
+        Alert.fire({
+          icon: "success",
+          title: "สร้างคอร์สเรียนเรียบร้อย",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        props.history.push("/status");
+      })
+      .catch(function (error) {
+        Alert.fire({
+          icon: "error",
+          title: "กรุณากรอกข้อมูลให้ครบถ้วน",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
   };
 
   return (
     <>
-      <div className="bg center ">
+      <div className="center bg">
         <h1 className="font2">เพิ่มคอร์สเรียนของฉัน</h1>
         <Form style={{ width: "40%" }}>
           <Form.Row>
@@ -51,7 +70,7 @@ const AddCourse = (props) => {
               <Form.Label className="font2">รายละเอียดวิชา</Form.Label>
               <Col>
                 <Form.Control
-                  placeholder="รายละเอียดต่าง ๆ เช่น พื้นฐานก่อนหน้า วัตถุประสงค์ในการเรียน อายุผู้เรียน เวลาที่ต้องการเรียน(กำหนดเป็นวันและเวลา/อาทิตย์) เป็นต้น"
+                  placeholder="รายละเอียดต่าง ๆ เช่น พื้นฐานก่อนหน้า วัตถุประสงค์ในการเรียน รายละเอียดของผู้เรียน ได้แก่ ชื่อ เบอร์โทรศัพท์ อายุ เวลาที่ต้องการเรียน(กำหนดเป็นวันและเวลา/อาทิตย์) เป็นต้น"
                   className="font"
                   as="textarea"
                   rows="8"
@@ -83,6 +102,7 @@ const AddCourse = (props) => {
           ยืนยัน
         </Button>
       </div>
+      <Footer />
     </>
   );
 };

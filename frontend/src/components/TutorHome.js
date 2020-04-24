@@ -1,96 +1,115 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
-import { Button, Card } from "react-bootstrap";
-import { connect } from "react-redux";
-import Axios from "axios";
+import { Button, Card, Carousel } from "react-bootstrap";
+import LoginButton from "./LoginFacebookButton";
+import Footer from "./Footer";
+import axios from "../../../backend/node_modules/axios";
 
 const TutorHome = (props) => {
-  const [courses, setCourses] = useState([]);
-
-  const fetchCourse = async () => {
-    const course = await Axios.get("http://localhost:5000/waitingcourse", {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
-    setCourses(course.data);
-  };
-
-  useEffect(() => {
-    fetchCourse();
-  }, []);
-
   return (
     <>
-      <div className="bg2 center">
-        <div className="row">
+      {/* <div className="bg center_page"> */}
+      <Carousel>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src="https://picsum.photos/800/400"
+            alt="First slide"
+          />
+          <Carousel.Caption>
+            <h3>First slide label</h3>
+            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src="https://picsum.photos/800/400"
+            alt="Third slide"
+          />
+
+          <Carousel.Caption>
+            <h3>Second slide label</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="d-block w-100"
+            src="https://picsum.photos/800/400"
+            alt="Third slide"
+          />
+
+          <Carousel.Caption>
+            <h3>Third slide label</h3>
+            <Button
+              variant="warning"
+              className="font"
+              style={{ marginTop: 5, marginBottom: 5 }}
+            >
+              เพิ่มคอร์ส
+            </Button>
+          </Carousel.Caption>
+        </Carousel.Item>
+      </Carousel>
+
+      <Footer />
+      {/* <div>
+          <Card bg="dark" style={{ width: "50rem", height: "20rem" }}>
+            <Card.Header className="font">วิธีการเพิ่มคอร์สเรียน</Card.Header>
+            <Card.Body className="student_home">
+              <text className="font">
+                1. กด เพิ่มคอร์ส เพื่อทำการเพิ่มคอร์สเรียนที่เราอยากเรียน
+              </text>
+              <Button
+                variant="warning"
+                className="font"
+                style={{ marginTop: 5, marginBottom: 5 }}
+              >
+                เพิ่มคอร์ส
+              </Button>
+              <text className="font">
+                2. เพิ่มข้อมูลลงแบบฟอร์มให้ครบถ้วน จากนั้นกด ยืนยัน
+                จากนั้นรอติวเตอร์สนใจคอร์สเรียนของคุณ
+              </text>
+              <Button
+                variant="success"
+                className="font"
+                style={{ marginTop: 5, marginBottom: 5 }}
+              >
+                ยืนยัน
+              </Button>
+              <text className="font">
+                3. ตรวจสอบสถานะคอร์สเรียนของคุณได้จากปุ่ม สถานะ
+              </text>
+              <Button
+                variant="danger"
+                className="font"
+                style={{ marginTop: 5, marginBottom: 5 }}
+              >
+                สถานะ
+              </Button>
+            </Card.Body>
+          </Card>
           <Button
             variant="warning"
             className="font"
             style={{ marginTop: 20 }}
-            onClick={() => props.history.push("/tutor/home")}
+            onClick={() => props.history.push("/add")}
           >
-            คอร์สเรียนทั้งหมด
+            เพิ่มคอร์ส
           </Button>
           <Button
             variant="danger"
             className="font"
             style={{ marginTop: 20, marginLeft: 20 }}
-            onClick={() => props.history.push("/tutor/course")}
+            onClick={() => props.history.push("/status")}
           >
-            คอร์สที่เลือก
+            สถานะ
           </Button>
-        </div>
-        <h1 className="font2">คอร์สเรียนทั้งหมด</h1>
-        <div className="status_box">
-          {courses.map((item, index) => {
-            return (
-              <Card
-                bg={item.status === "success" ? "danger" : "success"}
-                style={{ width: "18rem", marginTop: 10 }}
-              >
-                <Card.Header className="font">
-                  Status : {item.status}
-                </Card.Header>
-                <Card.Body>
-                  <Card.Title className="font">{item.name}</Card.Title>
-                  <Card.Text className="font">{item.description}</Card.Text>
-                </Card.Body>
-                <Card.Text className="font" style={{ marginBottom: 20 }}>
-                  ราคา : {item.price}
-                </Card.Text>
-                <Button
-                  variant="dark"
-                  style={{ width: "100% " }}
-                  onClick={async () => {
-                    await Axios.post(
-                      "http://localhost:5000/offer",
-                      {
-                        courseId: item.id,
-                      },
-                      {
-                        headers: {
-                          "Content-Type": "application/json",
-                          Authorization: `Bearer ${localStorage.getItem(
-                            "token"
-                          )}`,
-                        },
-                      }
-                    );
-                    props.history.push("/tutor/course");
-                  }}
-                >
-                  เลือก
-                </Button>
-              </Card>
-            );
-          })}
-        </div>
-      </div>
+        </div> */}
+      {/* </div> */}
     </>
   );
 };
-
-const mapStateToProps = ({ teacher }) => ({ ...teacher });
-export default connect(mapStateToProps)(TutorHome);
+export default TutorHome;

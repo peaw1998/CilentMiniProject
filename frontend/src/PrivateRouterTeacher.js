@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import TutorCourse from "./components/TutorCourse";
 import TutorHome from "./components/TutorHome";
+import TutorAllCourse from "./components/TutorAllCourse";
 import AdminWaiting from "./components/AdminWaiting";
 import AdminSuccess from "./components/AdminSuccess";
 import { useSelector } from "react-redux";
@@ -14,6 +15,10 @@ const PrivateRouter = () => {
     {
       path: "/tutor/course",
       component: TutorCourse,
+    },
+    {
+      path: "/tutor/allcourse",
+      component: TutorAllCourse,
     },
     {
       path: "/tutor/home",
@@ -38,7 +43,7 @@ const PrivateRouter = () => {
         </Switch>
         {/* <Switch>
           <Route path="/tutor/course" component={TutorCourse} exact={true} />
-          <Route path="/tutor/home" component={TutorHome} exact={true} />
+          <Route path="/tutor/allcourse" component={TutorAllCourse} exact={true} />
           <Route path="/tutor/waiting" component={AdminWaiting} exact={true} />
         <Route path="/tutor/success" component={AdminSuccess} exact={true} />
         </Switch> */}

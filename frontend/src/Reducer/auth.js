@@ -7,6 +7,8 @@ const auth = (
   switch (action.type) {
     case "LOGIN_SUCCESS":
       return { login: true };
+    case "LOGOUT":
+      return { login: false };
     default:
       return state;
   }

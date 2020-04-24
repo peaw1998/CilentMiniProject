@@ -18,6 +18,14 @@
 }
 .status_box {
   display: flex;
+  /* text-align: center; */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.status_box2 {
+  display: flex;
   text-align: center;
   flex-direction: column;
   align-items: center;
@@ -40,8 +48,7 @@
 }
 
 .bg {
-  background-image: url(./images/bg2.jpg);
-  height: 100%;
+  background-color: #efd6d2;
 }
 .bg2 {
   background-image: url(./images/bg2.jpg);
