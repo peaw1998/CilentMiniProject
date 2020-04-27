@@ -10,7 +10,7 @@ const MyNav = (props) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/teacher/profile", {
+      .get("https://miniproject-client.herokuapp.com/teacher/profile", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,

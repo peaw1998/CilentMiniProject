@@ -10,12 +10,15 @@ const Course = (props) => {
   const dispatch = useDispatch();
 
   const fetchCourse = async () => {
-    const course = await Axios.get("http://localhost:5000/teacher/offer", {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
+    const course = await Axios.get(
+      "https://miniproject-client.herokuapp.com/teacher/offer",
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
     dispatch({ type: "SET_COURSES", payload: course.data });
   };
 

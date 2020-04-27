@@ -10,7 +10,9 @@ const AdminSuccess = (props) => {
   const dispatch = useDispatch();
 
   const getSuccess = async () => {
-    let res = await axios.get("http://localhost:5000/successcourse");
+    let res = await axios.get(
+      "https://miniproject-client.herokuapp.com/successcourse"
+    );
     dispatch({ type: "SET_COURSES", payload: res.data });
   };
 

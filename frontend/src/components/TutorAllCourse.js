@@ -11,12 +11,15 @@ const TutorAllCourse = (props) => {
   const dispatch = useDispatch();
 
   const fetchCourse = async () => {
-    const course = await Axios.get("http://localhost:5000/waitingcourse", {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
+    const course = await Axios.get(
+      "https://miniproject-client.herokuapp.com/waitingcourse",
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
     dispatch({ type: "SET_COURSES", payload: course.data });
   };
 
@@ -62,7 +65,7 @@ const TutorAllCourse = (props) => {
                   style={{ width: "100% ", backgroundColor: "#d35656" }}
                   onClick={async () => {
                     await Axios.put(
-                      "http://localhost:5000/course/offer",
+                      "https://miniproject-client.herokuapp.com/course/offer",
                       {
                         courseId: item.id,
                       },

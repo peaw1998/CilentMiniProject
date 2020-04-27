@@ -122,7 +122,7 @@ const Login = (props) => {
             style={{ marginLeft: 5 }}
             onClick={async () => {
               const res = await axios.post(
-                "http://localhost:5000/admin/login",
+                "https://miniproject-client.herokuapp.com/admin/login",
                 {
                   email: email,
                   password: password,

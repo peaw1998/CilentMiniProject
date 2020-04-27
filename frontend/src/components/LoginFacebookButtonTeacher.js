@@ -26,10 +26,13 @@ const LoginFacebookButton = (props) => {
             console.log(result);
             if (result.additionalUserInfo.isNewUser) {
               //register
-              const res = await axios.post("http://localhost:5000/user", {
-                email: user.email,
-                role: "teacher",
-              });
+              const res = await axios.post(
+                "https://miniproject-client.herokuapp.com/user",
+                {
+                  email: user.email,
+                  role: "teacher",
+                }
+              );
               //ระบบ login อื่น นอกจาก facebook
               if (res.data) {
                 localStorage.setItem("token", res.data);
@@ -38,7 +41,7 @@ const LoginFacebookButton = (props) => {
               }
             } else {
               const res2 = await axios.post(
-                "http://localhost:5000/teacher/login",
+                "https://miniproject-client.herokuapp.com/teacher/login",
                 {
                   email: user.email,
                 }

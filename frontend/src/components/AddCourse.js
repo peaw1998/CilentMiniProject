@@ -16,7 +16,7 @@ const AddCourse = (props) => {
   const Post = async () => {
     const res1 = await axios
       .post(
-        "http://localhost:5000/course",
+        "https://miniproject-client.herokuapp.com/course",
         {
           name: courseRedux.course.name,
           description: courseRedux.course.description,

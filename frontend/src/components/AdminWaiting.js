@@ -10,7 +10,9 @@ const AdminWaiting = () => {
   const dispatch = useDispatch();
 
   const getWaiting = async () => {
-    let res = await axios.get("http://localhost:5000/waitingcourse");
+    let res = await axios.get(
+      "https://miniproject-client.herokuapp.com/waitingcourse"
+    );
     dispatch({ type: "SET_COURSES", payload: res.data });
   };
 

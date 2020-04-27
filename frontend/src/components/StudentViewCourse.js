@@ -11,7 +11,7 @@ const StudentViewCourse = (props) => {
 
   const getCourse = async () => {
     const course = await Axios.get(
-      `http://localhost:5000/course/${props.match.params.id}`
+      `https://miniproject-client.herokuapp.com/course/${props.match.params.id}`
     );
     dispatch({
       type: "UPDATE_COURSE",
@@ -29,7 +29,7 @@ const StudentViewCourse = (props) => {
 
   const deleteCourse = async () => {
     const res = await Axios.delete(
-      `http://localhost:5000/course/${props.match.params.id}`
+      `https://miniproject-client.herokuapp.com/course/${props.match.params.id}`
     ).then(() => {
       Alert.fire({
         icon: "success",
@@ -48,7 +48,7 @@ const StudentViewCourse = (props) => {
       courseRedux.course.price
     ) {
       const res = await Axios.put(
-        `http://localhost:5000/course/${props.match.params.id}`,
+        `https://miniproject-client.herokuapp.com/course/${props.match.params.id}`,
         {
           name: courseRedux.course.name,
           description: courseRedux.course.description,
