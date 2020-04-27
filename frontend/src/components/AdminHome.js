@@ -1,14 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../App.css";
+import axios from "axios";
+import { useDispatch } from "react-redux";
 import { Button, Card, Carousel } from "react-bootstrap";
-import LoginButton from "./LoginFacebookButton";
 import Footer from "./Footer";
-import axios from "../../../backend/node_modules/axios";
 
-const TutorHome = (props) => {
+const AdminHome = () => {
+  const [email, setEmail] = useState("");
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/admin/profile", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        setEmail(res.data.email);
+      })
+      .catch((error) => {
+        localStorage.removeItem("token");
+        dispatch({ type: "LOGOUT" });
+      });
+  }, []);
+
   return (
     <>
-      {/* <div className="bg center_page"> */}
       <Carousel>
         <Carousel.Item>
           <img
@@ -57,4 +76,5 @@ const TutorHome = (props) => {
     </>
   );
 };
-export default TutorHome;
+
+export default AdminHome;

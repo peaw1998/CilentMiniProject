@@ -41,12 +41,6 @@ const PrivateRouter = () => {
             );
           })}
         </Switch>
-        {/* <Switch>
-          <Route path="/tutor/course" component={TutorCourse} exact={true} />
-          <Route path="/tutor/allcourse" component={TutorAllCourse} exact={true} />
-          <Route path="/tutor/waiting" component={AdminWaiting} exact={true} />
-        <Route path="/tutor/success" component={AdminSuccess} exact={true} />
-        </Switch> */}
       </>
     );
   return <Redirect to="/login" />;

@@ -35,7 +35,7 @@ router.get("/student/course", setID, checkStudent, async (req, res) => {
   res.send(courseByStudent);
 });
 
-router.get("/student/profile", setID, async (req, res) => {
+router.get("/student/profile", setID, checkStudent, async (req, res) => {
   const response = await axios.get(
     `https://mini-project-f433b.firebaseio.com/students/${req.tokenID}.json`
   );

@@ -18,6 +18,10 @@ const MyNav = (props) => {
       })
       .then((res) => {
         setEmail(res.data.email);
+      })
+      .catch((error) => {
+        localStorage.removeItem("token");
+        dispatch({ type: "LOGOUT" });
       });
   }, []);
 

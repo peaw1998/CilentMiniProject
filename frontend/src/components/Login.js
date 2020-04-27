@@ -9,13 +9,19 @@ import {
   Nav,
   FormControl,
   Carousel,
+  Row,
 } from "react-bootstrap";
 import LoginButton from "./LoginFacebookButton";
 import LoginButtonTeacher from "./LoginFacebookButtonTeacher";
 import Footer from "./Footer";
+import axios from "axios";
+import { useDispatch } from "react-redux";
 
 const Login = (props) => {
   const [type, setType] = useState("initial");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
 
   let nav = () => {
     if (type === "initial") {
@@ -39,6 +45,16 @@ const Login = (props) => {
             }}
           >
             Tutor
+          </Button>
+          <Button
+            variant="outline-danger"
+            className="font"
+            style={{ margin: 10 }}
+            onClick={() => {
+              setType("admin");
+            }}
+          >
+            Admin
           </Button>
         </>
       );
@@ -72,6 +88,65 @@ const Login = (props) => {
             Back
           </Button>
           <LoginButtonTeacher />
+        </>
+      );
+    } else if (type === "admin") {
+      return (
+        <>
+          <Form>
+            <Form.Row>
+              <Col>
+                <Form.Control
+                  placeholder="E-mail"
+                  className="font"
+                  style={{ marginRight: 5 }}
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
+                />
+              </Col>
+              <Col>
+                <Form.Control
+                  placeholder="Password"
+                  type="password"
+                  className="font"
+                  style={{ marginRight: 5 }}
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
+                />
+              </Col>
+            </Form.Row>
+          </Form>
+          <Button
+            variant="outline-success"
+            className="font"
+            style={{ marginLeft: 5 }}
+            onClick={async () => {
+              const res = await axios.post(
+                "http://localhost:5000/admin/login",
+                {
+                  email: email,
+                  password: password,
+                }
+              );
+              if (res.data) {
+                localStorage.setItem("token", res.data);
+                dispatch({ type: "LOGIN_SUCCESS" });
+                props.history.push("/admin");
+              }
+            }}
+          >
+            Login
+          </Button>
+          <Button
+            variant="outline-warning"
+            className="font"
+            style={{ marginLeft: 5 }}
+            onClick={() => {
+              setType("initial");
+            }}
+          >
+            Back
+          </Button>
         </>
       );
     }

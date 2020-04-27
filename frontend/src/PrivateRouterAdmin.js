@@ -1,32 +1,26 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-import AddCourse from "./components/AddCourse";
-import StudentHome from "./components/StudentHome";
-import StudentViewCourse from "./components/StudentViewCourse";
-import Status from "./components/Status";
+import AdminHome from "./components/AdminHome";
+import AdminWaiting from "./components/AdminWaiting";
+import AdminSuccess from "./components/AdminSuccess";
 import { useSelector } from "react-redux";
-import MyNav from "./components/StudentNavBar";
+import MyNav from "./components/AdminNavBar";
 
 const PrivateRouter = () => {
   const auth = useSelector((state) => state.auth);
   console.log(auth);
-
   let arr = [
     {
-      path: "/status",
-      component: Status,
+      path: "/admin",
+      component: AdminHome,
     },
     {
-      path: "/add",
-      component: AddCourse,
+      path: "/admin/waiting",
+      component: AdminWaiting,
     },
     {
-      path: "/",
-      component: StudentHome,
-    },
-    {
-      path: "/view/:id",
-      component: StudentViewCourse,
+      path: "/admin/success",
+      component: AdminSuccess,
     },
   ];
 

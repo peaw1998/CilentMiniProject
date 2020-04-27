@@ -10,7 +10,7 @@ const MyNav = (props) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/student/profile", {
+      .get("http://localhost:5000/admin/profile", {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -31,7 +31,6 @@ const MyNav = (props) => {
         className="font2"
         onClick={(event) => {
           event.preventDefault();
-          props.history.push("/");
           console.log(props);
         }}
       >
@@ -44,21 +43,21 @@ const MyNav = (props) => {
           <Nav.Link
             onClick={(event) => {
               event.preventDefault();
-              props.history.push("/");
+              props.history.push("/admin");
             }}
           >
             {" "}
             Home
           </Nav.Link>
-          <Nav.Link className="font2" href="/add">
-            Add Course
+          <Nav.Link className="font2" href="/admin/success">
+            Success
           </Nav.Link>
-          <Nav.Link className="font2" href="/status">
-            Status
+          <Nav.Link className="font2" href="/admin/waiting">
+            Waiting
           </Nav.Link>
         </Nav>
         <text className="font2" style={{ marginRight: 10 }}>
-          {email}
+          ADMIN
         </text>
         <Button
           variant="outline-danger"

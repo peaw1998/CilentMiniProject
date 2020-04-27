@@ -1,138 +1,64 @@
-import React from 'react';
-import '../App.css';
-import { Button, Card, Form, Col } from 'react-bootstrap';
-
+import React, { useState, useEffect } from "react";
+import "../App.css";
+import { Button, Card, Form, Col } from "react-bootstrap";
+import axios from "axios";
+import Footer from "./Footer";
 
 const AdminWaiting = () => {
-    return (
-        <>
+  const [courses, setCourses] = useState([]);
 
-            {/* <div className="container-fluid"> */}
-            <div className="bg2 center">
-                < div className="row">
-                    <Button variant="warning" className="font" style={{ marginTop: 20 }}  >คอร์สเรียนของผู้เรียน</Button>
-                    <Button variant="danger" className="font" style={{ marginTop: 20, marginLeft: 20 }}>คอร์สเรียนที่สำเร็จแล้ว</Button>
-                </div>
-                <h1 className="font2">คอร์สเรียนของผู้เรียน</h1>
-                <div className="status_box">
-                    <Card
-                        bg="dark"
-                        style={{ width: '18rem' }}
-                    >
-                        <Card.Header className="font">Status : Waiting..</Card.Header>
-                        <Card.Body>
-                            <Card.Title className="font">ชื่อวิชา</Card.Title>
-                            <Card.Text className="font">
-                                Some quick example text to build on the card title and make up the
-                                bulk of the card's content.
-                        </Card.Text>
-                        </Card.Body>
-                        <Card.Text className="font" style={{ marginBottom: 20 }}>
-                            ราคา : 2000 บาท
-                        </Card.Text>
-                    </Card>
-                    <Card
-                        bg="dark"
-                        style={{ width: '18rem', marginTop: '1rem' }}
-                    >
-                        <Card.Header className="font">Status : Waiting..</Card.Header>
-                        <Card.Body>
-                            <Card.Title className="font">ชื่อวิชา</Card.Title>
-                            <Card.Text className="font">
-                                Some quick example text to build on the card title and make up the
-                                bulk of the card's content.
-                        </Card.Text>
-                        </Card.Body>
-                        <Card.Text className="font" style={{ marginBottom: 20 }}>
-                            ราคา : 2000 บาท
-                        </Card.Text>
-                    </Card>
-                    <Card
-                        bg="dark"
-                        style={{ width: '18rem', marginTop: '1rem' }}
-                    >
-                        <Card.Header className="font">Status : Waiting..</Card.Header>
-                        <Card.Body>
-                            <Card.Title className="font">ชื่อวิชา</Card.Title>
-                            <Card.Text className="font">
-                                Some quick example text to build on the card title and make up the
-                                bulk of the card's content.
-                        </Card.Text>
-                        </Card.Body>
-                        <Card.Text className="font" style={{ marginBottom: 20 }}>
-                            ราคา : 2000 บาท
-                        </Card.Text>
-                    </Card> <Card
-                        bg="dark"
-                        style={{ width: '18rem', marginTop: '1rem' }}
-                    >
-                        <Card.Header className="font">Status : Waiting..</Card.Header>
-                        <Card.Body>
-                            <Card.Title className="font">ชื่อวิชา</Card.Title>
-                            <Card.Text className="font">
-                                Some quick example text to build on the card title and make up the
-                                bulk of the card's content.
-                        </Card.Text>
-                        </Card.Body>
-                        <Card.Text className="font" style={{ marginBottom: 20 }}>
-                            ราคา : 2000 บาท
-                        </Card.Text>
-                    </Card> <Card
-                        bg="dark"
-                        style={{ width: '18rem', marginTop: '1rem' }}
-                    >
-                        <Card.Header className="font">Status : Waiting..</Card.Header>
-                        <Card.Body>
-                            <Card.Title className="font">ชื่อวิชา</Card.Title>
-                            <Card.Text className="font">
-                                Some quick example text to build on the card title and make up the
-                                bulk of the card's content.
-                        </Card.Text>
-                        </Card.Body>
-                        <Card.Text className="font" style={{ marginBottom: 20 }}>
-                            ราคา : 2000 บาท
-                        </Card.Text>
-                    </Card> <Card
-                        bg="dark"
-                        style={{ width: '18rem', marginTop: '1rem' }}
-                    >
-                        <Card.Header className="font">Status : Waiting..</Card.Header>
-                        <Card.Body>
-                            <Card.Title className="font">ชื่อวิชา</Card.Title>
-                            <Card.Text className="font">
-                                Some quick example text to build on the card title and make up the
-                                bulk of the card's content.
-                        </Card.Text>
-                        </Card.Body>
-                        <Card.Text className="font" style={{ marginBottom: 20 }}>
-                            ราคา : 2000 บาท
-                        </Card.Text>
-                    </Card> <Card
-                        bg="dark"
-                        style={{ width: '18rem', marginTop: '1rem' }}
-                    >
-                        <Card.Header className="font">Status : Waiting..</Card.Header>
-                        <Card.Body>
-                            <Card.Title className="font">ชื่อวิชา</Card.Title>
-                            <Card.Text className="font">
-                                Some quick example text to build on the card title and make up the
-                                bulk of the card's content.
-                        </Card.Text>
-                        </Card.Body>
-                        <Card.Text className="font" style={{ marginBottom: 20 }}>
-                            ราคา : 2000 บาท
-                        </Card.Text>
-                    </Card>
+  const getWaiting = async () => {
+    let res = await axios.get("http://localhost:5000/waitingcourse");
+    setCourses(res.data);
+    console.log(res.data);
+  };
 
-
-
-
-
-
-                </div>
-                {/* </div> */}
-            </div>
-        </>
-    )
-}
-export default AdminWaiting 
+  useEffect(() => {
+    getWaiting();
+  }, []);
+  return (
+    <>
+      <div className="bg center">
+        <h1 className="font2">คอร์สเรียนอยู่ระหว่างรอผู้สอน</h1>
+        <div className="status_box">
+          {courses.map((item, index) => {
+            return (
+              <Card bg="danger" style={{ width: "60%", marginTop: 10 }}>
+                <Card.Header
+                  className="font"
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    textAlign: "center",
+                  }}
+                >
+                  สถานะ : {item.status}
+                </Card.Header>
+                <Card.Text className="font" style={{ margin: 5 }}>
+                  รหัสวิชา : {item.id}
+                </Card.Text>
+                <Card.Text className="font" style={{ margin: 5 }}>
+                  ชื่อวิชา : {item.name}
+                </Card.Text>
+                <Card.Text className="font" style={{ margin: 5 }}>
+                  รายละเอียด : {item.description}
+                </Card.Text>
+                <Card.Text className="font" style={{ margin: 5 }}>
+                  ราคา : {item.price}
+                </Card.Text>
+                <Card.Text className="font" style={{ margin: 5 }}>
+                  รหัสผู้สร้างคอร์ส : {item.studentId}
+                </Card.Text>
+                <Card.Text className="font" style={{ margin: 5 }}>
+                  รหัสผู้สอน : -
+                </Card.Text>
+              </Card>
+            );
+          })}
+        </div>
+      </div>
+      <Footer />
+    </>
+  );
+};
+export default AdminWaiting;

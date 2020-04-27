@@ -13,6 +13,8 @@ const course = (
   action
 ) => {
   switch (action.type) {
+    case "SET_COURSES":
+      return { ...state, courses: [...action.payload] };
     default:
       return state;
   }

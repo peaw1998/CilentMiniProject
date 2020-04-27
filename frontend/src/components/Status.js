@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import "../App.css";
 import { Button, Card, Form, Col, Row, Container } from "react-bootstrap";
 import Axios from "axios";
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import Footer from "./Footer";
 import convert from "./convertToArray";
 
 const Status = (props) => {
-  const [courses, setCourses] = useState([]);
+  const courseRedux = useSelector((state) => state.course);
+  const dispatch = useDispatch();
 
   const fetchCourse = async () => {
     const course = await Axios.get("http://localhost:5000/student/course", {
@@ -17,7 +18,7 @@ const Status = (props) => {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-    setCourses(course.data);
+    dispatch({ type: "SET_COURSES", payload: course.data });
   };
 
   useEffect(() => {
@@ -26,7 +27,6 @@ const Status = (props) => {
 
   return (
     <>
-      {/* <div className="container-fluid"> */}
       <div className="bg center">
         <h1 className="font2">สถานะคอร์สเรียน</h1>
         <div className="status_box2">
@@ -63,7 +63,7 @@ const Status = (props) => {
 
         <h1 className="font2">คอร์สเรียนของฉัน</h1>
         <Container>
-          {convert(courses).map((item, index) => {
+          {convert(courseRedux.courses).map((item, index) => {
             return (
               <Row style={{ display: "flex", justifyContent: "start" }}>
                 {item.map((item2) => {
@@ -72,7 +72,14 @@ const Status = (props) => {
                       <div className="status_box2">
                         <Card
                           bg={item2.status === "success" ? "success" : "danger"}
-                          style={{ width: "14rem", marginTop: 10 }}
+                          style={{
+                            width: "14rem",
+                            marginTop: 10,
+                            cursor: "pointer",
+                          }}
+                          onClick={() => {
+                            props.history.push(`/view/${item2.id}`);
+                          }}
                         >
                           <Card.Header className="font">
                             Status : {item2.status}
@@ -100,27 +107,6 @@ const Status = (props) => {
             );
           })}
         </Container>
-        {/* return (
-
-          <div className="status_box">
-           <Card 
-              bg={item.status === "success" ? "danger" : "success"}
-              style={{ width: "18rem", marginTop: 10 }}
-            >
-              <Card.Header className="font">
-                Status : {item.status}
-              </Card.Header>
-              <Card.Body>
-                <Card.Title className="font">{item.name}</Card.Title>
-                <Card.Text className="font">{item.description}</Card.Text>
-              </Card.Body>
-              <Card.Text className="font" style={{ marginBottom: 20 }}>
-                ราคา : {item.price}
-              </Card.Text>
-            </Card>
-          </div>
-          );
-        */}
       </div>
       <Footer />
     </>

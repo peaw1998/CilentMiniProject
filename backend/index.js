@@ -14,7 +14,6 @@ app.use(require("./course"));
 app.use(require("./student"));
 app.use(require("./teacher"));
 app.use(require("./admin"));
-app.use(require("./offer"));
 app.use(require("./user"));
 const convertObjectToArray = require("./convertObjectToArray");
 let { checkStudent } = require("./middleware");

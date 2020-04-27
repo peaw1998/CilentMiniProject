@@ -4,6 +4,7 @@ import { Button, Card, Container } from "react-bootstrap";
 import { connect } from "react-redux";
 import Axios from "axios";
 import Footer from "./Footer";
+import Alert from "sweetalert2";
 
 const TutorAllCourse = (props) => {
   const [courses, setCourses] = useState([]);
@@ -57,8 +58,8 @@ const TutorAllCourse = (props) => {
                   variant="dark"
                   style={{ width: "100% " }}
                   onClick={async () => {
-                    await Axios.post(
-                      "http://localhost:5000/offer",
+                    await Axios.put(
+                      "http://localhost:5000/course/offer",
                       {
                         courseId: item.id,
                       },
@@ -70,8 +71,15 @@ const TutorAllCourse = (props) => {
                           )}`,
                         },
                       }
-                    );
-                    props.history.push("/tutor/course");
+                    ).then(() => {
+                      Alert.fire({
+                        icon: "success",
+                        title: "เลือกคอร์สสำเร็จ",
+                        showConfirmButton: false,
+                        timer: 1500,
+                      });
+                      props.history.push("/tutor/course");
+                    });
                   }}
                 >
                   เลือก

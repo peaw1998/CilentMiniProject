@@ -23,24 +23,12 @@ router.get("/createTokenTeacher", async (req, res) => {
 
 router.get("/teacher/offer", setID, checkTeacher, async (req, res) => {
   const response = await axios.get(
-    `https://mini-project-f433b.firebaseio.com/offers.json`
+    `https://mini-project-f433b.firebaseio.com/courses.json?orderBy="teacherId"&equalTo="${req.tokenID}"`
   );
-  if (response.data) {
-    const offerByTeacherId = convertObjectToArray(response.data).filter(
-      (course) => {
-        if (course && course.teacherId === req.tokenID) {
-          return true;
-        } else {
-          return false;
-        }
-      }
-    );
-    return res.send(offerByTeacherId);
-  }
-  return res.sendStatus(400);
+  return res.send(convertObjectToArray(response.data));
 });
 
-router.get("/teacher/profile", setID, async (req, res) => {
+router.get("/teacher/profile", setID, checkTeacher, async (req, res) => {
   const response = await axios.get(
     `https://mini-project-f433b.firebaseio.com/teachers/${req.tokenID}.json`
   );

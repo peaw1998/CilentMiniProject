@@ -24,7 +24,7 @@ const Course = (props) => {
 
   return (
     <>
-      <div className="bg center">
+      <div className=" bg center">
         <h1 className="font2">คอร์สเรียนของฉัน</h1>
         <div className="status_box">
           {offer.map((item, index) => {
@@ -38,7 +38,7 @@ const Course = (props) => {
                     textAlign: "center",
                   }}
                 >
-                  PIN : {item.courseId}
+                  PIN : {item.id}
                 </Card.Header>
                 <Card.Body>
                   <Card.Text className="font">ชื่อวิชา : {item.name}</Card.Text>
