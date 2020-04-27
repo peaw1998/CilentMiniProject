@@ -1,22 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Axios from "axios";
 import { Button, Card, Form, Col } from "react-bootstrap";
 import Footer from "./Footer";
 import Alert from "sweetalert2";
+import { useDispatch, useSelector } from "react-redux";
 
 const StudentViewCourse = (props) => {
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
+  const courseRedux = useSelector((state) => state.course);
+  const dispatch = useDispatch();
 
   const getCourse = async () => {
     const course = await Axios.get(
       `http://localhost:5000/course/${props.match.params.id}`
     );
-    setName(course.data.name);
-    setDescription(course.data.description);
-    setPrice(course.data.price);
-    console.log(course.data);
+    dispatch({
+      type: "UPDATE_COURSE",
+      payload: { field: "name", value: course.data.name },
+    });
+    dispatch({
+      type: "UPDATE_COURSE",
+      payload: { field: "description", value: course.data.description },
+    });
+    dispatch({
+      type: "UPDATE_COURSE",
+      payload: { field: "price", value: course.data.price },
+    });
   };
 
   const deleteCourse = async () => {
@@ -34,13 +42,17 @@ const StudentViewCourse = (props) => {
   };
 
   const editCourse = async () => {
-    if (name && description && price) {
+    if (
+      courseRedux.course.name &&
+      courseRedux.course.description &&
+      courseRedux.course.price
+    ) {
       const res = await Axios.put(
         `http://localhost:5000/course/${props.match.params.id}`,
         {
-          name: name,
-          description: description,
-          price: price,
+          name: courseRedux.course.name,
+          description: courseRedux.course.description,
+          price: courseRedux.course.price,
         }
       ).then(() => {
         Alert.fire({
@@ -61,14 +73,30 @@ const StudentViewCourse = (props) => {
     }
   };
 
+  const clearRedux = () => {
+    dispatch({
+      type: "UPDATE_COURSE",
+      payload: { field: "name", value: "" },
+    });
+    dispatch({
+      type: "UPDATE_COURSE",
+      payload: { field: "description", value: "" },
+    });
+    dispatch({
+      type: "UPDATE_COURSE",
+      payload: { field: "price", value: "" },
+    });
+  };
+
   useEffect(() => {
     getCourse();
+    return clearRedux;
   }, []);
 
   return (
     <>
       <div className="center bg">
-        <h1 className="font2">คอร์สเรียน {name}</h1>
+        <h1 className="font2">คอร์สเรียน {courseRedux.course.name}</h1>
         <Form style={{ width: "40%" }}>
           <Form.Row>
             <Form.Group as={Col} controlId="validationCustom01">
@@ -77,8 +105,13 @@ const StudentViewCourse = (props) => {
                 <Form.Control
                   className="font"
                   style={{ marginTop: 5, marginBottom: 5 }}
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  value={courseRedux.course.name}
+                  onChange={(e) =>
+                    dispatch({
+                      type: "UPDATE_COURSE",
+                      payload: { field: "name", value: e.target.value },
+                    })
+                  }
                 />
               </Col>
             </Form.Group>
@@ -90,9 +123,14 @@ const StudentViewCourse = (props) => {
                 <Form.Control
                   className="font"
                   as="textarea"
-                  value={description}
+                  value={courseRedux.course.description}
                   rows="8"
-                  onChange={(e) => setDescription(e.target.value)}
+                  onChange={(e) =>
+                    dispatch({
+                      type: "UPDATE_COURSE",
+                      payload: { field: "description", value: e.target.value },
+                    })
+                  }
                 />
               </Col>
             </Form.Group>
@@ -103,9 +141,14 @@ const StudentViewCourse = (props) => {
               <Col>
                 <Form.Control
                   className="font"
-                  value={price}
+                  value={courseRedux.course.price}
                   style={{ marginTop: 5, marginBottom: 5 }}
-                  onChange={(e) => setPrice(e.target.value)}
+                  onChange={(e) =>
+                    dispatch({
+                      type: "UPDATE_COURSE",
+                      payload: { field: "price", value: e.target.value },
+                    })
+                  }
                 />
               </Col>
             </Form.Group>

@@ -15,6 +15,15 @@ const course = (
   switch (action.type) {
     case "SET_COURSES":
       return { ...state, courses: [...action.payload] };
+    case "UPDATE_COURSE":
+      console.log(action);
+      return {
+        ...state,
+        course: {
+          ...state.course,
+          [action.payload.field]: action.payload.value,
+        },
+      };
     default:
       return state;
   }

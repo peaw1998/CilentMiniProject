@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "../App.css";
 import { Button, Card, Form, Col } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import Footer from "./Footer";
 
 const AdminSuccess = (props) => {
-  const [courses, setCourses] = useState([]);
+  const courseRedux = useSelector((state) => state.course);
+  const dispatch = useDispatch();
 
   const getSuccess = async () => {
     let res = await axios.get("http://localhost:5000/successcourse");
-    setCourses(res.data);
-    console.log(res.data);
+    dispatch({ type: "SET_COURSES", payload: res.data });
   };
 
   useEffect(() => {
@@ -22,9 +23,12 @@ const AdminSuccess = (props) => {
       <div className="bg center">
         <h1 className="font2">คอร์สเรียนที่สำเร็จแล้ว</h1>
         <div className="status_box">
-          {courses.map((item, index) => {
+          {courseRedux.courses.map((item, index) => {
             return (
-              <Card bg="success" style={{ width: "60%", marginTop: 10 }}>
+              <Card
+                className="card-success"
+                style={{ width: "60%", marginTop: 10 }}
+              >
                 <Card.Header
                   className="font"
                   style={{

@@ -32,6 +32,15 @@
   justify-content: center;
   width: 100%;
 }
+.card-success {
+  background-color: #9ccc65 !important;
+}
+.card-waiting {
+  background-color: #ef5350 !important;
+}
+.card-tutor {
+  background-color: #e2ba8c !important;
+}
 .student_home {
   display: flex;
   text-align: center;
@@ -49,6 +58,7 @@
 
 .bg {
   background-color: #efd6d2;
+  min-height: 80%;
 }
 .bg2 {
   background-image: url(./images/bg2.jpg);
@@ -60,7 +70,7 @@
 
 .font {
   font-family: "Kanit";
-  color: #ffffff;
+  /* color: #ffffff; */
 }
 
 .font2 {

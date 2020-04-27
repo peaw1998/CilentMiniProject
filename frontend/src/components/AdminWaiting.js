@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import "../App.css";
 import { Button, Card, Form, Col } from "react-bootstrap";
 import axios from "axios";
 import Footer from "./Footer";
+import { useDispatch, useSelector } from "react-redux";
 
 const AdminWaiting = () => {
-  const [courses, setCourses] = useState([]);
+  const courseRedux = useSelector((state) => state.course);
+  const dispatch = useDispatch();
 
   const getWaiting = async () => {
     let res = await axios.get("http://localhost:5000/waitingcourse");
-    setCourses(res.data);
-    console.log(res.data);
+    dispatch({ type: "SET_COURSES", payload: res.data });
   };
 
   useEffect(() => {
@@ -21,9 +22,12 @@ const AdminWaiting = () => {
       <div className="bg center">
         <h1 className="font2">คอร์สเรียนอยู่ระหว่างรอผู้สอน</h1>
         <div className="status_box">
-          {courses.map((item, index) => {
+          {courseRedux.courses.map((item, index) => {
             return (
-              <Card bg="danger" style={{ width: "60%", marginTop: 10 }}>
+              <Card
+                className="card-waiting"
+                style={{ width: "60%", marginTop: 10 }}
+              >
                 <Card.Header
                   className="font"
                   style={{

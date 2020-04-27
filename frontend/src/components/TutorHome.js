@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import "../App.css";
 import { Button, Card, Carousel } from "react-bootstrap";
 import LoginButton from "./LoginFacebookButton";
@@ -8,7 +8,6 @@ import axios from "../../../backend/node_modules/axios";
 const TutorHome = (props) => {
   return (
     <>
-      {/* <div className="bg center_page"> */}
       <Carousel>
         <Carousel.Item>
           <img

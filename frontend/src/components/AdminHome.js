@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "../App.css";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -6,7 +6,6 @@ import { Button, Card, Carousel } from "react-bootstrap";
 import Footer from "./Footer";
 
 const AdminHome = () => {
-  const [email, setEmail] = useState("");
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -16,9 +15,6 @@ const AdminHome = () => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-      })
-      .then((res) => {
-        setEmail(res.data.email);
       })
       .catch((error) => {
         localStorage.removeItem("token");

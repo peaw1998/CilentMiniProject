@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import "../App.css";
 import { Button, Card, Form, Col } from "react-bootstrap";
-import { connect } from "react-redux";
+import { useDispatch, useSelector, connect } from "react-redux";
 import Axios from "axios";
 import Footer from "./Footer";
 
 const Course = (props) => {
-  const [offer, setOffer] = useState([]);
+  const courseRedux = useSelector((state) => state.course);
+  const dispatch = useDispatch();
 
   const fetchCourse = async () => {
-    const offer = await Axios.get("http://localhost:5000/teacher/offer", {
+    const course = await Axios.get("http://localhost:5000/teacher/offer", {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-    setOffer(offer.data);
+    dispatch({ type: "SET_COURSES", payload: course.data });
   };
 
   useEffect(() => {
@@ -27,9 +28,12 @@ const Course = (props) => {
       <div className=" bg center">
         <h1 className="font2">คอร์สเรียนของฉัน</h1>
         <div className="status_box">
-          {offer.map((item, index) => {
+          {courseRedux.courses.map((item, index) => {
             return (
-              <Card bg="dark" style={{ width: "60%", marginTop: 10 }}>
+              <Card
+                className="card-tutor"
+                style={{ width: "60%", marginTop: 10 }}
+              >
                 <Card.Header
                   className="font"
                   style={{

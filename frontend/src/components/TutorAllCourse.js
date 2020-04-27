@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import "../App.css";
 import { Button, Card, Container } from "react-bootstrap";
-import { connect } from "react-redux";
+import { useDispatch, useSelector, connect } from "react-redux";
 import Axios from "axios";
 import Footer from "./Footer";
 import Alert from "sweetalert2";
 
 const TutorAllCourse = (props) => {
-  const [courses, setCourses] = useState([]);
+  const courseRedux = useSelector((state) => state.course);
+  const dispatch = useDispatch();
 
   const fetchCourse = async () => {
     const course = await Axios.get("http://localhost:5000/waitingcourse", {
@@ -16,7 +17,7 @@ const TutorAllCourse = (props) => {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-    setCourses(course.data);
+    dispatch({ type: "SET_COURSES", payload: course.data });
   };
 
   useEffect(() => {
@@ -28,10 +29,12 @@ const TutorAllCourse = (props) => {
       <div className="bg center">
         <h1 className="font2">คอร์สเรียนทั้งหมด</h1>
         <div className="status_box">
-          {courses.map((item, index) => {
+          {courseRedux.courses.map((item, index) => {
             return (
               <Card
-                bg={item.status === "success" ? "danger" : "success"}
+                className={
+                  item.status === "success" ? "card-success" : "card-waiting"
+                }
                 style={{ width: "60%", marginTop: 10 }}
               >
                 <Card.Header
@@ -56,7 +59,7 @@ const TutorAllCourse = (props) => {
                 </Card.Text>
                 <Button
                   variant="dark"
-                  style={{ width: "100% " }}
+                  style={{ width: "100% ", backgroundColor: "#d35656" }}
                   onClick={async () => {
                     await Axios.put(
                       "http://localhost:5000/course/offer",

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "../App.css";
 import { Button, Card, Form, Col } from "react-bootstrap";
 import { connect } from "react-redux";
@@ -6,20 +6,21 @@ import { bindActionCreators } from "redux";
 import axios from "axios";
 import Footer from "./Footer";
 import Alert from "sweetalert2";
+import { useDispatch, useSelector } from "react-redux";
 
 const AddCourse = (props) => {
-  const [name, setName] = useState("");
-  const [detail, setDetail] = useState("");
-  const [price, setPrice] = useState("");
+  const courseRedux = useSelector((state) => state.course);
+  const dispatch = useDispatch();
+  console.log(courseRedux.course);
 
   const Post = async () => {
     const res1 = await axios
       .post(
         "http://localhost:5000/course",
         {
-          name: name,
-          description: detail,
-          price: price,
+          name: courseRedux.course.name,
+          description: courseRedux.course.description,
+          price: courseRedux.course.price,
         },
         {
           headers: {
@@ -60,7 +61,12 @@ const AddCourse = (props) => {
                   placeholder="วิชาที่อยากเรียน เช่น เปียโน คณิตศาสตร์(ม.2) ภาษาไทย(Onet) เป็นต้น "
                   className="font"
                   style={{ marginTop: 5, marginBottom: 5 }}
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e) => {
+                    dispatch({
+                      type: "UPDATE_COURSE",
+                      payload: { field: "name", value: e.target.value },
+                    });
+                  }}
                 />
               </Col>
             </Form.Group>
@@ -74,7 +80,12 @@ const AddCourse = (props) => {
                   className="font"
                   as="textarea"
                   rows="8"
-                  onChange={(e) => setDetail(e.target.value)}
+                  onChange={(e) => {
+                    dispatch({
+                      type: "UPDATE_COURSE",
+                      payload: { field: "description", value: e.target.value },
+                    });
+                  }}
                 />
               </Col>
             </Form.Group>
@@ -87,7 +98,12 @@ const AddCourse = (props) => {
                   placeholder="ราคา กำหนดเป็นช่วง เช่น 300-500/ชั่วโมง"
                   className="font"
                   style={{ marginTop: 5, marginBottom: 5 }}
-                  onChange={(e) => setPrice(e.target.value)}
+                  onChange={(e) => {
+                    dispatch({
+                      type: "UPDATE_COURSE",
+                      payload: { field: "price", value: e.target.value },
+                    });
+                  }}
                 />
               </Col>
             </Form.Group>
