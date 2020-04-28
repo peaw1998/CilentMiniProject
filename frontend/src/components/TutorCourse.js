@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "../App.css";
-import { Button, Card, Form, Col } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import { useDispatch, useSelector, connect } from "react-redux";
 import Axios from "axios";
 import Footer from "./Footer";

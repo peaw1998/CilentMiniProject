@@ -1,8 +1,7 @@
 import React from "react";
 import "../App.css";
-import { Button, Card, Form, Col } from "react-bootstrap";
+import { Button, Form, Col } from "react-bootstrap";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import axios from "axios";
 import Footer from "./Footer";
 import Alert from "sweetalert2";

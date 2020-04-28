@@ -58,7 +58,7 @@
 
 .bg {
   background-color: #efd6d2;
-  min-height: 80%;
+  min-height: 90%;
 }
 .bg2 {
   background-image: url(./images/bg2.jpg);
@@ -71,6 +71,10 @@
 .font {
   font-family: "Kanit";
   /* color: #ffffff; */
+}
+.font3 {
+  font-family: "Kanit";
+  color: #ffffff;
 }
 
 .font2 {

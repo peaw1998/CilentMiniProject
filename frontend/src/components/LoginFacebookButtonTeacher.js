@@ -5,7 +5,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { withRouter } from "react-router-dom";
 
-const LoginFacebookButton = (props) => {
+const LoginFacebookButtonTeacher = (props) => {
   let provider = new firebase.auth.FacebookAuthProvider();
   const dispatch = useDispatch();
 
@@ -74,4 +74,4 @@ const LoginFacebookButton = (props) => {
   );
 };
 
-export default withRouter(LoginFacebookButton);
+export default withRouter(LoginFacebookButtonTeacher);

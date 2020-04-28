@@ -62,7 +62,7 @@ const TutorAllCourse = (props) => {
                 </Card.Text>
                 <Button
                   variant="dark"
-                  style={{ width: "100% ", backgroundColor: "#d35656" }}
+                  style={{ width: "100% " }}
                   onClick={async () => {
                     await Axios.put(
                       "https://miniproject-client.herokuapp.com/course/offer",

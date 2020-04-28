@@ -20,10 +20,10 @@ const Footer = () => {
           alignItems: "center",
         }}
       >
-        <text className="font" style={{ fontSize: 30 }}>
+        <text className="font3" style={{ fontSize: 30 }}>
           Qpid Course
         </text>
-        <text className="font" style={{ fontSize: 25 }}>
+        <text className="font3" style={{ fontSize: 25 }}>
           คิวปิด คอร์ส
         </text>
       </div>
@@ -34,8 +34,12 @@ const Footer = () => {
           alignItems: "center",
         }}
       >
-        <text className="font">By PIMWIPA SAKULKHAM</text>
-        <text className="font">ID : 5935512010</text>
+        <text className="font3" style={{ fontSize: 15 }}>
+          By PIMWIPA SAKULKHAM
+        </text>
+        <text className="font3" style={{ fontSize: 15 }}>
+          ID : 5935512010
+        </text>
       </div>
 
       <div
@@ -45,9 +49,9 @@ const Footer = () => {
           alignItems: "center",
         }}
       >
-        <text className="font">240-311</text>
-        <text className="font">DISTRIBUTED COMPUTING</text>
-        <text className="font">AND WEB TECHNOLOGIES</text>
+        <text className="font3">240-311</text>
+        <text className="font3">DISTRIBUTED COMPUTING</text>
+        <text className="font3">AND WEB TECHNOLOGIES</text>
       </div>
     </div>
   );
