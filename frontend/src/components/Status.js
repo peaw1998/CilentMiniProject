@@ -55,7 +55,7 @@ const Status = (props) => {
             className="card-success"
             style={{ width: "18rem", marginTop: 10 }}
           >
-            <Card.Header className="font">Status : Waiting</Card.Header>
+            <Card.Header className="font">Status : Success</Card.Header>
             <Card.Body>
               <Card.Title className="font">ชื่อวิชา</Card.Title>
               <Card.Text className="font">รายละเอียดต่าง ๆ</Card.Text>
