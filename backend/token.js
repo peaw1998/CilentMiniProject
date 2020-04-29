@@ -33,5 +33,4 @@ const tokenFunc = {
     }
   },
 };
-
 module.exports = tokenFunc;

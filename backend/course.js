@@ -1,11 +1,9 @@
 let express = require("express");
-let bodyParser = require("body-parser");
 let cors = require("cors");
 let router = express.Router();
 const convertObjectToArray = require("./convertObjectToArray");
-const { check, validationResult } = require("express-validator");
+const { check } = require("express-validator");
 let axios = require("axios");
-let token = require("./token");
 let { setID, checkStudent, checkTeacher } = require("./middleware");
 let validator = require("./validator");
 

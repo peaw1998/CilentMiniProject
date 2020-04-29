@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 const AddCourse = (props) => {
   const courseRedux = useSelector((state) => state.course);
   const dispatch = useDispatch();
-  console.log(courseRedux.course);
 
   const Post = async () => {
     const res1 = await axios

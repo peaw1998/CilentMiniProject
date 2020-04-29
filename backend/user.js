@@ -1,5 +1,4 @@
 let express = require("express");
-let bodyParser = require("body-parser");
 let cors = require("cors");
 let router = express.Router();
 let axios = require("axios");
@@ -33,5 +32,4 @@ router.post("/user", async (req, res) => {
     return res.send(token.createTokenTeacher(resTeacher.data.name));
   }
 });
-
 module.exports = router;

@@ -9,8 +9,6 @@ import MyNav from "./components/StudentNavBar";
 
 const PrivateRouter = () => {
   const auth = useSelector((state) => state.auth);
-  console.log(auth);
-
   let arr = [
     {
       path: "/status",
